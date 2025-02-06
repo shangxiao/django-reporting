@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Site",
+            name="Location",
             fields=[
                 (
                     "id",
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name="Level",
+            name="Store",
             fields=[
                 (
                     "id",
@@ -36,17 +36,18 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("name", models.CharField()),
+                ("address", models.CharField()),
                 (
-                    "site",
+                    "location",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="reports.site"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="reports.location",
                     ),
                 ),
             ],
         ),
         migrations.CreateModel(
-            name="Space",
+            name="Sale",
             fields=[
                 (
                     "id",
@@ -57,32 +58,12 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("name", models.CharField()),
+                ("timestamp", models.DateTimeField()),
+                ("sale", models.IntegerField()),
                 (
-                    "level",
+                    "store",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="reports.level"
-                    ),
-                ),
-            ],
-        ),
-        migrations.CreateModel(
-            name="Data",
-            fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("count", models.IntegerField()),
-                (
-                    "space",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="reports.space"
+                        on_delete=django.db.models.deletion.CASCADE, to="reports.store"
                     ),
                 ),
             ],
