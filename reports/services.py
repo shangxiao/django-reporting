@@ -21,5 +21,23 @@ def series_date_range_jan_2025():
     )
 
 
-def data_report():
-    pass
+# demo series + all row left join onto filtered set?
+# + regroup?
+def sales_report():
+    class Sales(models.Model):
+        timestamp = models.DateTimeField()
+        total = models.IntegerField()
+
+    qs = Sales.objects.raw("""\
+        select series.timestamptz
+        from generate_series('2025-01-01'::timestamptz, '2025-01-31'::timestamptz, '1 day'::interval) series
+        left join
+
+
+    return [{
+        'timestamp': s.timestamp,
+        'total': s.total
+    } for
+
+
+# demo grouping sets
